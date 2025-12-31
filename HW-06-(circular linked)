@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+void insert(int a[], int *n, int v, int p) {
+    for (int i = (*n)++; i > p; i--) a[i] = a[i-1];
+    a[p] = v;
+}
+
+void del(int a[], int *n, int p) {
+    for (int i = p; i < --(*n); i++) a[i] = a[i+1];
+}
+
+int main() {
+    int a[100] = {10,20,30,40,50}, n = 5;
+
+    insert(a, &n, 25, 2);
+    printf("After Insert: ");
+    for (int i = 0; i < n; i++) printf("%d ", a[i]);
+
+    del(a, &n, 3);
+    printf("\nAfter Delete: ");
+    for (int i = 0; i < n; i++) printf("%d ", a[i]);
+
+    return 0;
+}
