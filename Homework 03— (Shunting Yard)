@@ -1,0 +1,75 @@
+
+1. Definition
+
+The Shunting Yard Algorithm is an algorithm used to convert an infix expression (e.g., a + b) into a postfix expression (Reverse Polish Notation).
+It was developed by Edsger Dijkstra to correctly handle operator precedence and parentheses.
+The algorithm uses a stack to temporarily store operators and brackets.
+
+2. Algorithm Steps
+
+Scan the expression from left to right.
+
+If the token is an operand (letter or number), add it directly to the output.
+
+If the token is an operator (+, -, *, /):
+
+Pop operators from the stack to the output while they have higher or equal precedence.
+
+Push the current operator onto the stack.
+
+If the token is a left parenthesis (, push it onto the stack.
+
+If the token is a right parenthesis ):
+
+Pop operators from the stack to the output until ( is found.
+
+Remove the left parenthesis from the stack.
+
+After reading the entire expression, pop all remaining operators from the stack to the output.
+
+3. Example 1: a*b+c
+
+Read a → operand → output: a
+
+Read * → operator → push *
+
+Read b → operand → output: ab
+
+Read + → operator
+
+* has higher precedence → pop * → output: ab*
+
+push +
+
+Read c → operand → output: ab*c
+
+End → pop + → output: ab*c+
+
+Postfix Result: ab*c+
+
+4. Example 2: (a+b)*c
+
+Read ( → push to stack
+
+Read a → operand → output: a
+
+Read + → operator → push +
+
+Read b → operand → output: ab
+
+Read ) → pop until ( → pop + → output: ab+
+
+Remove (
+
+Read * → operator → push *
+
+Read c → operand → output: ab+c
+
+End → pop * → output: ab+c*
+
+Postfix Result: ab+c*
+
+5. Final Output
+Infix Expression	Postfix Expression
+a*b+c	ab*c+
+(a+b)*c	ab+c*
