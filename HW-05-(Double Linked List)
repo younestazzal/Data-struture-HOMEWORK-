@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int v;
+    struct Node *n, *p;
+} Node;
+
+Node* newNode(int v) {
+    Node* x = malloc(sizeof(Node));
+    x->v = v; x->n = x->p = NULL;
+    return x;
+}
+
+void insert(Node** h, int v, int pos) {
+    Node *x = newNode(v), *t = *h;
+    if (!pos) {
+        x->n = *h;
+        if (*h) (*h)->p = x;
+        *h = x; return;
+    }
+    for (int i = 0; i < pos-1 && t; i++) t = t->n;
+    if (!t) return;
+    x->n = t->n; x->p = t;
+    if (t->n) t->n->p = x;
+    t->n = x;
+}
+
+void del(Node** h, int pos) {
+    Node *t = *h;
+    if (!t) return;
+    if (!pos) {
+        *h = t->n;
+        if (*h) (*h)->p = NULL;
+        free(t); return;
+    }
+    for (int i = 0; i < pos && t; i++) t = t->n;
+    if (!t) return;
+    if (t->n) t->n->p = t->p;
+    if (t->p) t->p->n = t->n;
+    free(t);
+}
+
+void show(Node* h) {
+    for (; h; h = h->n) printf("%d ", h->v);
+    printf("\n");
+}
+
+int main() {
+    Node* h = NULL;
+    insert(&h, 10, 0);
+    insert(&h, 20, 1);
+    insert(&h, 30, 2);
+    show(h);
+    del(&h, 1);
+    show(h);
+    return 0;
+}
