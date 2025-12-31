@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main() {
+    int tree[10];
+
+    // Creating tree nodes
+    tree[0] = 10;   // root
+    tree[1] = 20;   // left child of root
+    tree[2] = 30;   // right child of root
+    tree[3] = 40;   // left child of node 20
+    tree[4] = 50;   // right child of node 20
+
+    printf("Binary Tree (Array Representation):\n");
+    for (int i = 0; i < 5; i++)
+        printf("Index %d -> %d\n", i, tree[i]);
+
+    return 0;
+}
